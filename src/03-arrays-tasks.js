@@ -19,8 +19,8 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -37,7 +37,6 @@ function findElement(/* arr, value */) {
 function generateOdds(/* len */) {
   throw new Error('Not implemented');
 }
-
 /**
  * Returns the doubled array - elements of the specified array
  * are repeated twice using original order
@@ -65,8 +64,9 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfPositives(arr) {
+  const res = arr.filter((x) => x > 0);
+  return res;
 }
 
 /**
