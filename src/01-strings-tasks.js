@@ -211,29 +211,36 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   let str = '';
+
   let i = 0;
-  let j = 0;
-  let k = 0;
-  let m = 0;
-  while (i < width) {
+  str += '┌';
+
+  while (i < width - 2) {
     str += '─';
     i += 1;
   }
-  str = '\n';
-  while (k < height) {
-    str += '|';
-    while (j < width) {
+  str += `┐\n`;
+
+  i = 0;
+  while (i < height - 2) {
+    str += '│';
+    let j = 0;
+    while (j < width - 2) {
       str += ' ';
       j += 1;
     }
-    str = '\n';
-    k += 1;
+    str += `│\n`;
+    i += 1;
   }
-  while (m < width) {
+
+  str += '└';
+  i = 0;
+  while (i < width - 2) {
     str += '─';
-    m += 1;
+    i += 1;
   }
-  str = '\n';
+  str += `┘\n`;
+
   return str;
 }
 
@@ -255,6 +262,33 @@ function getRectangleString(width, height) {
  */
 function encodeToRot13(str) {
   const alphabet = [
+    ' ',
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
     'a',
     'b',
     'c',
@@ -293,6 +327,8 @@ function encodeToRot13(str) {
       if (idx + 13 > alphabet.length) {
         minus = alphabet.length - idx;
         newStr += alphabet[idx - minus - 1];
+      } else if (idx === 0) {
+        newStr += ' ';
       } else newStr += alphabet[idx + 13];
       i += 1;
     }
