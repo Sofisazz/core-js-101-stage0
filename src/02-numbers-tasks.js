@@ -107,8 +107,13 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const scalar = x1 * x2 + y1 * y2;
+  const lengthA = (x1 ** 2 + y1 ** 2) ** (1 / 2);
+  const lengthB = (x2 ** 2 + y2 ** 2) ** (1 / 2);
+  const cos = scalar / (lengthA * lengthB);
+  const angle = Math.acos(cos);
+  return angle;
 }
 
 /**
@@ -178,8 +183,16 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  if (pow === 0) return num;
+  let del = Math.round(num / (pow * 10)).toString();
+
+  let i = 0;
+  while (i <= num.toString().length - del.length) {
+    del += '0';
+    i += 1;
+  }
+  return +del;
 }
 
 /**
@@ -199,8 +212,16 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n === 1 || n === 2 || n === 3) return true;
+
+  let i = 2;
+  while (i < n) {
+    if (n % i === 0) return false;
+    i += 1;
+  }
+
+  return true;
 }
 
 /**
@@ -218,8 +239,10 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (value === null) return def;
+  if (!(+value).isNaN) return value;
+  return def;
 }
 
 module.exports = {
