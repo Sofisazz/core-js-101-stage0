@@ -49,8 +49,9 @@ function getCircleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value2) {
+  const sum = value1 + value2;
+  return +sum / 2;
 }
 
 /**
@@ -184,14 +185,10 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
+  if (pow < 0) return 'Error';
   if (pow === 0) return num;
-  let del = Math.round(num / (pow * 10)).toString();
-
-  let i = 0;
-  while (i <= num.toString().length - del.length) {
-    del += '0';
-    i += 1;
-  }
+  const power = 10 ** pow;
+  const del = Math.round(num / power) * power;
   return +del;
 }
 
@@ -240,9 +237,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (value === null) return def;
-  if (!(+value).isNaN) return value;
-  return def;
+  return Number(value) || def;
 }
 
 module.exports = {
