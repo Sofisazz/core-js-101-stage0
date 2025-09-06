@@ -178,16 +178,9 @@ function isInsideCircle(/* circle, point */) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-  let bool = false;
   let i = 0;
   while (i < str.length) {
-    const letter = str[i];
-    let j = i + 1;
-    while (j < str.length) {
-      if (letter === str[j]) bool = true;
-      if (j === str.length - 1 && bool === false) return letter;
-      j += 1;
-    }
+    if (!str.includes(str[i], str.indexOf(str[i] + 1))) return true;
     i += 1;
   }
   return null;
@@ -302,8 +295,34 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const newCcn = ccn.toString();
+  const arr = [];
+  const { length } = newCcn;
+
+  let i;
+  if (length % 2 === 0) {
+    i = 1;
+  } else i = 0;
+
+  while (i < length) {
+    if (2 * +newCcn[i] > 9) {
+      arr.push(2 * +newCcn[i] - 9);
+    } else arr.push(2 * +newCcn[i]);
+    i += 2;
+  }
+
+  i = 0;
+  let sum = 0;
+  while (i < arr.length) {
+    sum += arr[i];
+    i += 1;
+  }
+
+  if (sum % 10 === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -361,8 +380,33 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const rev = [];
+
+  if (str.length === 0) return true;
+  if (str.length % 2 !== 0) return false;
+
+  let i = 0;
+
+  while (i < str.length) {
+    if (str[i] === '(' || str[i] === '[' || str[i] === '{' || str[i] === '<') {
+      rev.push(str[i]);
+    }
+    if (str[i] === ')' || str[i] === ']' || str[i] === '}' || str[i] === '>') {
+      if (rev.length === 0) return false;
+      const last = rev.pop();
+      if (
+        (str[i] === ')' && last !== '(') ||
+        (str[i] === '}' && last !== '{') ||
+        (str[i] === ']' && last !== '[') ||
+        (str[i] === '>' && last !== '<')
+      ) {
+        return false;
+      }
+    }
+    i += 1;
+  }
+  return rev.length === 0;
 }
 
 /**
