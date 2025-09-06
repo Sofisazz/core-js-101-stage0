@@ -34,8 +34,15 @@ function findElement(arr, value) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  const arr = new Array(len).fill(-1);
+  let i = 0;
+  const newArr = arr.map((item) => {
+    i += 2;
+    return item + i;
+  });
+
+  return newArr;
 }
 /**
  * Returns the doubled array - elements of the specified array
@@ -197,8 +204,14 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  let res = '';
+  arr.map((item) => {
+    res += `${item.join(',')}\n`;
+    return item;
+  });
+  res = res.slice(0, res.length - 1);
+  return res;
 }
 
 /**
@@ -230,8 +243,12 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const res = arr.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    arr[0]
+  );
+  return res;
 }
 
 /**
@@ -263,8 +280,17 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const res = [];
+
+  if (arr.length === 0) return [];
+  arr.forEach((item, index) => {
+    // Push the item repeated (index + 1) times into the result array
+    for (let i = 0; i < index + 1; i + 1) {
+      res.push(item);
+    }
+  });
+  return res;
 }
 
 /**
